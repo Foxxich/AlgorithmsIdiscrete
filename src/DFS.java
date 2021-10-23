@@ -25,13 +25,10 @@ public class DFS {
             startList.add(new Node(graphConstruct.startList.get(i), graphConstruct.startList.get(i).toString()));
             endList.add(new Node(graphConstruct.endList.get(i), graphConstruct.endList.get(i).toString()));
         }
-        System.out.println("S1: " + startList.size() +" S2: "+endList.size());
-        for (int i = 0; i < nodeList.size(); i++) {
-            if(i != nodeList.size() - 1) {
-                graph.addEdge(nodeList.get(i), nodeList.get(i + 1));
-            } else {
-                graph.addEdge(nodeList.get(i), nodeList.get(0));
-            }
+        for (int i = 0; i < startList.size(); i++) {
+            graph.addEdge(startList.get(i), endList.get(i));
+            System.out.println(startList.get(i).n +" "+ endList.get(i).n);
+            graph.addEdge(startList.get(i), endList.get(i));
         }
 //        Node a = new Node(0, "0");
 //        Node b = new Node(1, "1");
@@ -46,7 +43,7 @@ public class DFS {
 //        graph.addEdge(d,e);
 //        graph.addEdge(e,a);
         System.out.println("If we were to use our previous DFS method, we would get an incomplete traversal");
-        graph.depthFirstSearch(nodeList.get(0));
+        graph.depthFirstSearch(startList.get(0));
     }
 }
 
