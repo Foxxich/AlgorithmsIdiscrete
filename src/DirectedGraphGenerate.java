@@ -5,7 +5,7 @@ public class DirectedGraphGenerate {
     public int edges;
 
     // Set a maximum limit to the vertices
-    final int MAX_LIMIT = 10;
+    final int MAX_LIMIT = 100;
 
     // A Random instance to generate random values
     Random random = new Random();

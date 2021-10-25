@@ -1,9 +1,9 @@
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Graph {
     // Each node maps to a list of all his neighbors
     private HashMap<Node, LinkedList<Node>> adjacencyMap;
+    private List<Node> nodes = new ArrayList<>();
     private boolean directed;
 
     public Graph(boolean directed) {
@@ -22,13 +22,16 @@ public class Graph {
         adjacencyMap.put(a, tmp);
     }
 
-    public void addEdge(Node source, Node destination) {
+    public void addEdge(Node sourceToAdd, Node destinationToAdd) {
+
+        Node source = obtainNode(sourceToAdd);
+        Node destination =  obtainNode(destinationToAdd);
 
         // We make sure that every used node shows up in our .keySet()
-        if (!adjacencyMap.keySet().contains(source))
+        if (!adjacencyMap.containsKey(source))
             adjacencyMap.put(source, null);
 
-        if (!adjacencyMap.keySet().contains(destination))
+        if (!adjacencyMap.containsKey(destination))
             adjacencyMap.put(destination, null);
 
         addEdgeHelper(source, destination);
@@ -36,6 +39,16 @@ public class Graph {
         // If a graph is undirected, we want to add an edge from destination to source as well
         if (!directed) {
             addEdgeHelper(destination, source);
+        }
+    }
+
+    private Node obtainNode(Node node) {
+        int indexOfNode = nodes.indexOf(node);
+        if(indexOfNode != -1) {
+            return nodes.get(indexOfNode);
+        } else {
+            nodes.add(node);
+            return node;
         }
     }
 

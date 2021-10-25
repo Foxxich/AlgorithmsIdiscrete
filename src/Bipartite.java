@@ -45,7 +45,7 @@ class Bipartite
     // Driver Code
     public static void main(String[] args) throws FileNotFoundException {
         boolean flag = false;
-        GraphConstruct graphConstruct = new GraphConstruct("bipartite.txt");
+        GraphConstruct graphConstruct = new GraphConstruct("C100.txt");
 
         int numberOfVertices = graphConstruct.numberOfVertices; //7
 

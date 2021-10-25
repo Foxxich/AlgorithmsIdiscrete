@@ -136,7 +136,7 @@ public class TS {
 
     // Driver code
     public static void main(String[] args) throws FileNotFoundException {
-        GraphConstruct graphConstruct = new GraphConstruct("test.txt");
+        GraphConstruct graphConstruct = new GraphConstruct("C100.txt");
         if(graphConstruct.graphType.equals("D")) {
 
             s = new Stack<>();
