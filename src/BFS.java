@@ -6,7 +6,7 @@ public class BFS {
     public static void main(String[] args) throws FileNotFoundException {
 
         Graph graph;
-        GraphConstruct graphConstruct = new GraphConstruct("C100.txt");
+        GraphConstruct graphConstruct = new GraphConstruct("C1000.txt");
         if(graphConstruct.graphType.equals("D")) {
             graph = new Graph(true);
         } else {

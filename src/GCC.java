@@ -35,7 +35,7 @@ class GCC
         }
     }
 
-    // Function that returns reverse (or transpose) of this graph
+    // Function that returns reverse of this graph
     GCC getTranspose()
     {
         GCC g = new GCC(V);
@@ -65,9 +65,7 @@ class GCC
 
     void printSCCs()
     {
-        Stack<Integer> stack = new Stack<Integer>();
-
-        // Mark all the vertices as not visited (For first DFS)
+        Stack<Integer> stack = new Stack<>();
         boolean[] visited = new boolean[V];
         for(int i = 0; i < V; i++)
             visited[i] = false;
@@ -76,14 +74,11 @@ class GCC
             if (!visited[i])
                 fillOrder(i, visited, stack);
 
-        // Create a reversed graph
-        GCC gr = getTranspose();
-
+        GCC transpose = getTranspose();
         // Mark all the vertices as not visited (For second DFS)
         for (int i = 0; i < V; i++)
             visited[i] = false;
 
-        // Now process all vertices in order defined by Stack
         while (!stack.empty())
         {
             // Pop a vertex from stack
@@ -92,14 +87,14 @@ class GCC
             // Print Strongly connected component of the popped vertex
             if (!visited[v])
             {
-                gr.DFSUtil(v, visited);
+                transpose.DFSUtil(v, visited);
                 System.out.println();
             }
         }
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        GraphConstruct graphConstruct = new GraphConstruct("C100.txt");
+        GraphConstruct graphConstruct = new GraphConstruct("C1000.txt");
         if(graphConstruct.graphType.equals("D")) {
 
             int numberOfVertices = graphConstruct.numberOfVertices;
@@ -111,8 +106,7 @@ class GCC
             for (int i = 0; i < numberOfEdges; i++) {
                 g.addEdge(startList.get(i), endList.get(i));
             }
-            System.out.println("Following are strongly connected components " +
-                    "in given graph ");
+            System.out.println("Following are strongly connected components in given graph ");
             g.printSCCs();
         } else {
             System.out.println("Expected directed graph!");

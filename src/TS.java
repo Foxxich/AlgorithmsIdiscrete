@@ -1,8 +1,7 @@
 import java.io.FileNotFoundException;
 import java.util.*;
 
-// This class represents a directed graph
-// using adjacency list representation
+//Topological Sort
 public class TS {
     // No. of vertices
     private int V;
@@ -16,9 +15,10 @@ public class TS {
     TS(int v)
     {
         V = v;
-        adj = new ArrayList<ArrayList<Integer> >(v);
-        for (int i = 0; i < v; ++i)
-            adj.add(new ArrayList<Integer>());
+        adj = new ArrayList<>(v);
+        for (int i = 0; i < v; ++i) {
+            adj.add(new ArrayList<>());
+        }
     }
 
     // Function to add an edge into the graph
@@ -33,7 +33,7 @@ public class TS {
         Integer i;
 
         // Recur for all the vertices adjacent
-        // to thisvertex
+        // to this vertex
         for (Integer integer : adj.get(v)) {
             i = integer;
             if (!visited[i])
@@ -49,10 +49,10 @@ public class TS {
     // It uses recursive topologicalSortUtil()
     void topologicalSort()
     {
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
 
         // Mark all the vertices as not visited
-        boolean visited[] = new boolean[V];
+        boolean[] visited = new boolean[V];
         for (int i = 0; i < V; i++)
             visited[i] = false;
 
@@ -83,8 +83,7 @@ public class TS {
         {
             pos.put(s.peek(), ind);
 
-            // Push element to get
-            // Topological Order
+            // get Topological Order
             tsort.add(s.peek());
 
             ind += 1;
@@ -97,20 +96,13 @@ public class TS {
         {
             for(Integer it : adj.get(i))
             {
-
-                // If parent vertex
-                // does not appear first
                 if (pos.get(i) > pos.get(it))
                 {
-
                     // Cycle exists
                     return true;
                 }
             }
         }
-
-        // Return false if cycle
-        // does not exist
         return false;
     }
 
@@ -120,29 +112,22 @@ public class TS {
 
         // Set the vertex as visited
         visited[u] = 1;
-
         for(Integer it : adj.get(u))
         {
-
             // Visit connected vertices
             if (visited[it] == 0)
                 dfs(it);
         }
-
-        // Push into the stack on
-        // complete visit of vertex
         s.push(u);
     }
 
-    // Driver code
     public static void main(String[] args) throws FileNotFoundException {
-        GraphConstruct graphConstruct = new GraphConstruct("C100.txt");
+        GraphConstruct graphConstruct = new GraphConstruct("C1000.txt");
         if(graphConstruct.graphType.equals("D")) {
 
             s = new Stack<>();
             tsort = new ArrayList<>();
 
-            int numberOfEdges = graphConstruct.numberOfEdges;
             int numberOfVertices = graphConstruct.numberOfVertices;
 
             List<Integer> startList = graphConstruct.startList;
@@ -152,8 +137,7 @@ public class TS {
             for (int i = 0; i < numberOfVertices; i++) {
                 g.addEdge(startList.get(i), endList.get(i));
             }
-            System.out.println("Following is a Topological "
-                    + "sort of the given graph");
+            System.out.println("Following is a Topological sort of the given graph");
 
             g.topologicalSort();
 
@@ -164,12 +148,12 @@ public class TS {
                     dfs(i);
                 }
             }
-
-            // If cycle exist
-            if (check_cycle(numberOfVertices))
-                System.out.println("Yes");
-            else
-                System.out.println("No");
+            System.out.println("\n");
+            if (check_cycle(numberOfVertices)) {
+                System.out.println("Graph has cycle");
+            } else {
+                System.out.println("Graph has no cycle");
+            }
         } else {
             System.out.println("Expected directed graph");
         }

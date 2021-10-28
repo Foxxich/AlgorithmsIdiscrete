@@ -52,26 +52,6 @@ public class Graph {
         }
     }
 
-    public void printEdges() {
-        for (Node node : adjacencyMap.keySet()) {
-            System.out.print("The " + node.name + " has an edge towards: ");
-            for (Node neighbor : adjacencyMap.get(node)) {
-                System.out.print(neighbor.name + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public boolean hasEdge(Node source, Node destination) {
-        return adjacencyMap.containsKey(source) && adjacencyMap.get(source).contains(destination);
-    }
-
-    public void resetNodesVisited(){
-        for(Node node : adjacencyMap.keySet()){
-            node.unvisit();
-        }
-    }
-
     public void depthFirstSearch(Node node) {
         node.visit();
         System.out.print(node.name + " ");
@@ -100,9 +80,6 @@ public class Graph {
         while (!queue.isEmpty()) {
             Node currentFirst = queue.removeFirst();
 
-            // In some cases we might have added a particular node more than once before
-            // actually visiting that node, so we make sure to check and skip that node if we have
-            // encountered it before
             if (currentFirst.visited)
                 continue;
 
@@ -112,8 +89,6 @@ public class Graph {
 
             LinkedList<Node> allNeighbors = adjacencyMap.get(currentFirst);
 
-            // We have to check whether the list of neighbors is null before proceeding, otherwise
-            // the for-each loop will throw an exception
             if (allNeighbors == null)
                 continue;
 
